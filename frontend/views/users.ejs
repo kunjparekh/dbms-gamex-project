@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/css/User.css" />
+  </head>
+
+  <body>
+    <%- include("./partials/Navbar.ejs") %>
+
+    <button
+      type="button"
+      class="btn btn-primary btn-insert-modal position-fixed"
+      data-bs-toggle="modal"
+      data-bs-target="#insertModal"
+      data-bs-title="Create new user"
+      style="right: 2em; bottom: 2em"
+    >
+      <i class="fa-solid fa-plus btn-insert-modal"></i>
+    </button>
+    <form action="/users" method="post">
+      <!-- Modal to create user -->
+      <div
+        class="modal fade"
+        id="insertModal"
+        tabindex="-1"
+        aria-labelledby="insertModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content p-5">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="insertModalLabel">
+                Insert User
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="mb-3">
+              <label for="user_id-in" class="form-label">User ID</label>
+              <input
+                type="text"
+                class="form-control"
+                id="user_id-in"
+                value=""
+                name="User_id"
+                required
+                placeholder="User ID"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="user_name-in" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="user_name-in"
+                value=""
+                name="User_name"
+                required
+                placeholder="Username"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password-in" class="form-label">Password</label>
+              <input
+                type="text"
+                class="form-control"
+                id="password-in"
+                value=""
+                name="Password"
+                required
+                placeholder="Password"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email-in" class="form-label">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                id="email-in"
+                value=""
+                name="Email_id"
+                required
+                placeholder="Email Id"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="birthdate-in" class="form-label">BirthDate</label>
+              <input
+                type="text"
+                class="form-control"
+                id="birthdate-in"
+                value=""
+                name="BirthDate"
+                required
+                placeholder="Birthdate"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="age-in" class="form-label">Age</label>
+              <input
+                type="text"
+                class="form-control"
+                id="age-in"
+                value=""
+                name="Age"
+                required
+                placeholder="Age"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary insert-submit-btn">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Modal to edit user -->
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-5">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editModalLabel">Edit User</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="mb-3">
+            <label for="User_id" class="form-label">User ID</label>
+            <input
+              type="text"
+              class="form-control"
+              id="User_id"
+              disabled
+              value=""
+              name="User_id"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="User_name" class="form-label">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              id="User_name"
+              value=""
+              name="User_name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Password" class="form-label">Password</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Password"
+              value=""
+              name="Password"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Email_id" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Email_id"
+              disabled
+              value=""
+              name="Email_id"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="BirthDate" class="form-label">BirthDate</label>
+            <input
+              type="text"
+              class="form-control"
+              id="BirthDate"
+              disabled
+              value=""
+              name="BirthDate"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="Age" class="form-label">Age</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Age"
+              disabled
+              value=""
+              name="Age"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary submit-btn">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid w-75 my-5">
+      <table class="table">
+        <thead class="bg-dark">
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Email ID</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Age</th>
+            <th scope="col">Edit User</th>
+            <th scope="col">Delete User</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </body>
+
+  <script>
+            var data = <%- JSON.stringify(data) %>;
+            console.log(data.rows[0])
+            var table=``;
+            data.rows.forEach(row => {
+             console.log(row.User_id);
+                table +=
+                `<tr>
+          <td scope="col">${row.User_id}</td>
+          <td scope="col">${row.User_name}</td>
+          <td scope="col">${row.Password}</td>
+          <td scope="col">${row.Email_id}</td>
+          <td scope = "col"> ${row.BirthDate}</td>
+          <td scope="col">${row.Age}</td>
+          <td scope="col"><button type="button" data-user=${row.User_id} class="btn btn-primary btn-modal" data-bs-toggle="modal" data-bs-target="#editModal">
+              <i data-user=${row.User_id} class="fa-solid fa-pen-to-square btn-modal"></i>
+          </button>
+          </td>
+          <td scope="col">
+             <i role="button" data-user=${row.User_id} class="fa-solid fa-trash text-danger btn-delete p-2" ></i>
+          </td>
+        </tr>`
+            });
+
+
+          document.querySelector('.table').innerHTML += table;
+           var response = {};
+            document.querySelectorAll('.btn-modal').forEach((row)=>row.addEventListener('click', (e)=>{
+              let obj = undefined;
+              data.rows.forEach((row)=> {
+               // console.log(e.target.dataset.user);
+                if(row.User_id == e.target.dataset.user)
+                {
+                  console.log("hello");
+                  obj = row;
+                  return;
+                }
+              })
+              response = obj;
+             console.log(response);
+              document.querySelector('#User_id').value =obj.User_id
+              document.querySelector("#User_name").value = obj.User_name;
+              document.querySelector("#Password").value = obj.Password;
+              document.querySelector("#Email_id").value = obj.Email_id;
+              document.querySelector("#BirthDate").value = obj.BirthDate;
+              document.querySelector("#Age").value = obj.Age;
+            }))
+
+    document.querySelector('.submit-btn').addEventListener('click', ()=> {
+      response.User_name = document.querySelector('#User_name').value;
+      response.Password = document.querySelector('#Password').value;
+   //   console.log(response.User_name);
+      if(response.User_name!=='' && response.Password!=='')
+      {
+        console.log("fetched");
+        fetch(`http://localhost:3000/users/${response.User_id}`, {
+         method: 'PUT',
+          headers: {
+            'Content-type': 'application/json'
+          },
+          body: JSON.stringify(response)
+        })
+          if(!(alert(`User with id${response.User_id} updated successfully`)))
+          {
+            location.reload()
+          }
+        }
+        else {
+          alert('UserName and Password non empty')
+        }
+    })
+
+
+    document.querySelectorAll('.btn-delete').forEach((row)=>{
+      row.addEventListener('click', (e)=>{
+         const id = e.target.dataset.user;
+          if(confirm(`Are you sure you want to delete this user ${id}?`))
+          {
+              fetch(`http://localhost:3000/users/${id}`, {
+                method :"delete",
+                headers:{
+                  'Content-type' :"application/json"
+                }
+              }).then((response)=>{
+                console.log(response);
+                if(confirm(`User ${id} deleted successfully`))
+                {
+                  location.reload();
+                }
+              })
+          }
+      })
+    })
+  </script>
+</html>
